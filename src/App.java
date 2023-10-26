@@ -1,94 +1,45 @@
-import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws Exception {
-        Scanner input = new Scanner(System.in);
+        // Set up variables
+        int numWinsFalse = 0;
+        int numLosesFalse = 0;
+        int numWinsTrue = 0;
+        int numLossesTrue = 0;
+        // So you can easily change the amount
+        int numTries = 1000000;
 
-        // Pick a random door: 1, 2, or 3
-        int winDoor = (int) (Math.random() * 3 + 1);
-        int firstNonPrize;
-        int secondNonPrize;
-
-        if (winDoor == 1)
+        // Try false
+        for (int i = 0; i < numTries; i++)
         {
-            firstNonPrize = 2;
-            secondNonPrize = 3;
-        }
-        else if (winDoor == 2)
-        {
-            firstNonPrize = 1;
-            secondNonPrize = 3;
-        }
-        else
-        {
-            firstNonPrize = 1;
-            secondNonPrize = 2;
-        }
-        
-        // Prompt the user for a door (int)
-        System.out.print("Welcome to Let's Make a Deal!\nPick a door, 1, 2, or 3: ");
-        int userChoice = input.nextInt();
-        
-        // Open one of the other doors (see exercise notes)
-        System.out.println("You picked door " + userChoice);
-
-        // If they picked the prize door
-        if (userChoice == winDoor)
-        {
-            int randDoorToShow = (int) (Math.random() * 2);
-            if (randDoorToShow == 0) // Pick first non-prize door
+            if (MontyHallSim.runSim(false))
             {
-                System.out.println("I opened door " + firstNonPrize);
-            }
-            else // Pick second non-prize door
-            {
-                System.out.println("I opened door " + secondNonPrize);
-            }
-
-        }
-        else // If they picked one of the non-prize doors, show them the other non-prize door
-        {
-            if (userChoice == firstNonPrize)
-            {
-                System.out.println("I opened door " + secondNonPrize);
+                numWinsFalse++;
             }
             else
             {
-                System.out.println("I opened door " + firstNonPrize);
+                numLosesFalse++;
             }
         }
-        
-        // Prompt the user to see if they want to switch their
-        // door choice (boolean)
-        System.out.print("Switch doors (true or false): ");
-        boolean switchDoor = input.nextBoolean();
-        
-        // Print win or lose
-        
-        // ----------------------------------------------
-        // This is why you have a better chance after choosing! The selection is between two different items
-        // ----------------------------------------------
 
-        if (switchDoor)
+        System.out.println("When switching set to false:");
+        System.out.println("Wins: " + numWinsFalse + " -- Losses: " + numLosesFalse);
+        System.out.println("Win: " + ((double) numWinsFalse / numTries * 100) + "%");
+
+        // Try true
+        for (int i = 0; i < numTries; i++)
         {
-            if (userChoice == winDoor)
+            if (MontyHallSim.runSim(true))
             {
-                System.out.println("Sorry, you lose.");
+                numWinsTrue++;
             }
             else
             {
-                System.out.println("You win!");
+                numLossesTrue++;
             }
         }
-        else if (userChoice == winDoor)
-        {
-            System.out.println("You win!");
-        }
-        else
-        {
-            System.out.println("Sorry, you lose.");
-        }
 
-        // Close input
-        input.close();
+        System.out.println("\n\nWhen switching set to true:");
+        System.out.println("Wins: " + numWinsTrue + " -- Losses: " + numLossesTrue);
+        System.out.println("Win: " + ((double) numWinsTrue / numTries * 100) + "%");
     }
 }
