@@ -12,26 +12,8 @@ public class MontyHallSim {
         //      - The only case you would lose if you switched would be if you chose the door that had the prize to begin with. That is a 1/3 probability
         //      - The other 2/3 Probability would be for if you chose a door that did not have the price, and if you switched to the other one that probability stayed.
         // --------------------------------
-
+        
         // return true or false for win or lose
-        if (switchDoor)
-        {
-            if (userChoice == winDoor)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-        else if (userChoice == winDoor)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return (switchDoor && (userChoice != winDoor)) || (!switchDoor && (userChoice == winDoor));
     }
 }
