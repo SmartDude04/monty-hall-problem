@@ -1,6 +1,8 @@
 public class App {
     public static void main(String[] args) throws Exception {
         // Set up variables
+        double startTime = System.currentTimeMillis();
+
         int numWinsFalse = 0;
         int numLosesFalse = 0;
         int numWinsTrue = 0;
@@ -41,5 +43,9 @@ public class App {
         System.out.println("\n\nWhen switching set to true:");
         System.out.println("Wins: " + numWinsTrue + " -- Losses: " + numLossesTrue);
         System.out.println("Win: " + ((double) numWinsTrue / numTries * 100) + "%");
+
+        double endTime = System.currentTimeMillis();
+
+        System.out.println("Time: "+ (endTime - startTime));
     }
 }
